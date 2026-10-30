@@ -2,8 +2,8 @@
 <html lang="en"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes">
-<meta name="theme-color" content="#1e3a8a">
-<title>IELTS 1200 · 40-Day Calendar · British Accent</title>
+<meta name="theme-color" content="#9b416c">
+<title>IELTS 1200 · 40-Day Calendar · English + Bengali Audio</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
 :root{--bg:#f4f6fb;--card:#fff;--text:#1e293b;--muted:#64748b;--accent:#2563eb;--accent-l:#dbeafe;--green:#16a34a;--green-l:#dcfce7;--amber:#d97706;--amber-l:#fef3c7;--red:#dc2626;--border:#e2e8f0;--sh:0 4px 14px rgba(0,0,0,.05);--r:16px}
@@ -117,6 +117,370 @@ border-radius:12px;font-weight:800;font-size:.85rem;cursor:pointer;width:100%;ma
 @media(max-width:700px){.cal-grid{grid-template-columns:repeat(4,1fr);gap:8px}.day-card{padding:11px 6px}.day-card .dn{font-size:.9rem}.day-card .dd{font-size:.55rem}.day-card .dp{font-size:.62rem}}
 @media(max-width:520px){body{padding:9px}.cal-grid{grid-template-columns:repeat(3,1fr)}.header{padding:15px 16px;flex-direction:column;align-items:flex-start}.header h1{font-size:1.12rem}.clock{text-align:left;width:100%}.stat .n{font-size:1.22rem}.stat .l{font-size:.55rem}.card{padding:14px 15px}.wm .w{font-size:1.08rem}.btn{padding:10px 12px;font-size:.78rem;min-width:100px}.upload-box{padding:22px 18px}}
 @media(max-width:380px){.stats{grid-template-columns:repeat(2,1fr)}.cal-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ============================================================
+   SOFT LIGHT THEME + WIDE DESKTOP LAYOUT
+   ============================================================ */
+:root{
+  --bg:#f4f7fc;
+  --card:#ffffff;
+  --text:#2d3850;
+  --muted:#78849a;
+  --accent:#8199cf;
+  --accent-l:#e9effb;
+  --green:#67a88e;
+  --green-l:#e9f5ef;
+  --amber:#c79263;
+  --amber-l:#fff3e8;
+  --red:#d97786;
+  --border:#e3e9f3;
+  --sh:0 5px 18px rgba(65,83,120,.055);
+  --r:18px;
+}
+html{scroll-behavior:smooth}
+body{
+  background:linear-gradient(180deg,#f5f8ff 0%,#f8f7fc 55%,#f5f8fc 100%);
+  color:var(--text);
+  padding:14px clamp(12px,1.2vw,22px) 30px;
+}
+.app{width:100%;max-width:none;margin:0 auto}
+.header{
+  background:linear-gradient(120deg,#e2edff 0%,#e9e8fb 55%,#f9eafa 100%);
+  color:#34415f;
+  border:1px solid #e1e7f4;
+  box-shadow:0 10px 28px rgba(109,129,177,.10);
+  padding:22px 28px;
+}
+.header h1{color:#34415f;font-size:clamp(1.25rem,2vw,1.7rem)}
+.header .sub{color:#66738e;opacity:1;font-size:.86rem}
+.clock{background:rgba(255,255,255,.62);color:#50607d;border:1px solid rgba(255,255,255,.8)}
+.clock strong{color:#354462}
+.stats{gap:12px}
+.stat,.prog,.day-progress,.card,.day-card,.audio-panel{
+  border-color:var(--border);
+  box-shadow:var(--sh);
+}
+.stat{padding:16px 10px}
+.stat .n{color:#718bc6}
+.prog{padding:17px 20px}
+.bar{background:#e9edf5}
+.fill{background:linear-gradient(90deg,#9eb5e5,#c5a9dc)}
+.toolbar{gap:10px}
+.btn{border-radius:13px}
+.b1{background:#829ad0;color:white;box-shadow:0 4px 12px rgba(130,154,208,.20)}
+.b2{background:#fff;color:#65728d;border-color:#e2e8f2}
+.b3{background:#76ad98;color:white;box-shadow:0 4px 12px rgba(118,173,152,.18)}
+.b4{background:#b09acb;color:#fff;box-shadow:0 4px 12px rgba(176,154,203,.18)}
+.cal-header h2{color:#394761}
+.cal-header p{color:#7a879e}
+.cal-grid{grid-template-columns:repeat(8,minmax(0,1fr));gap:12px}
+.day-card{
+  border:1px solid #e4eaf4;
+  border-radius:16px;
+  padding:16px 12px;
+  background:rgba(255,255,255,.92);
+}
+.day-card:hover{box-shadow:0 10px 24px rgba(79,100,145,.10)}
+.day-card .dn{color:#3d4b68}
+.day-card .dp{background:#f0f3f9;color:#71809c}
+.day-card .mini-bar{background:#edf0f6}
+.day-card.today{border:2px solid #9bb1df;background:linear-gradient(180deg,#edf3ff,#fff)}
+.day-card.today .dn{color:#6d86bf}
+.day-card.done{border-color:#9bcbb6;background:#f3faf6}
+.day-card.done .dp{background:#e3f3eb;color:#4b8a70}
+.day-view .day-title{color:#3b4964}
+.day-progress{border-radius:16px}
+.day-progress .fill{background:linear-gradient(90deg,#8fc4aa,#b0d8c2)}
+.list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.card{
+  padding:19px 20px;
+  border-radius:18px;
+  background:rgba(255,255,255,.96);
+  min-width:0;
+}
+.card.mastered{border-left:5px solid #82bda2;background:#f8fcf9}
+.card.learning{border-left:5px solid #e0b17d;background:#fffdfa}
+.wm .w{font-size:1.3rem;color:#34415d}
+.wm .p{background:#f0f3fa;color:#7c88a0}
+.spk{background:#e9effb;color:#6d85bd;width:42px;height:42px}
+.spk:hover{background:#dce7fa}
+.spk.on{background:#8099cf;color:#fff}
+.bn{color:#4a5f87;font-size:1.02rem}
+.df{color:#69758c;font-size:.9rem}
+.sy{color:#78849a;font-size:.83rem}
+.sy strong{color:#53627e}
+.ex{background:#f5f7fc;border-left-color:#a2b4dc;color:#596783}
+.acts button{background:#fff;border-color:#e5eaf2;color:#748099}
+.acts .g-on{background:#e9f5ef;border-color:#91c2aa;color:#4a896e}
+.acts .a-on{background:#fff3e8;border-color:#dfb181;color:#9a704a}
+.back-btn{background:#fff;border-color:#e3e9f3;color:#65728d}
+.back-btn:hover{background:#f4f6fb}
+.upload-screen{background:var(--bg)}
+.upload-box{border-color:var(--border);box-shadow:0 16px 45px rgba(65,83,120,.10)}
+.pick-btn{background:#829ad0;box-shadow:0 6px 18px rgba(130,154,208,.22)}
+.pick-btn:hover{background:#718bc4}
+.dropzone{background:#f6f8fd;border-color:#d6deed}
+.dropzone:hover,.dropzone.drag{border-color:#90a8d9;background:#edf2fd}
+.paste-btn{background:#ab96c7}
+.paste-btn:hover{background:#9880b9}
+
+/* Listening controls */
+.audio-panel{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+  padding:14px 18px;
+  margin:-2px 0 16px;
+  background:rgba(255,255,255,.84);
+  border:1px solid var(--border);
+  border-radius:16px;
+}
+.audio-heading{min-width:190px;flex:1 1 220px}
+.audio-title{font-weight:800;font-size:.94rem;color:#485978}
+.audio-hint{font-size:.72rem;color:#8a95a9;margin-top:3px}
+.speed-control{display:flex;align-items:center;gap:9px;color:#6e7c96;font-size:.78rem;font-weight:750}
+.speed-control select{
+  appearance:auto;
+  border:1px solid #dfe6f1;
+  background:#f8faff;
+  color:#50617f;
+  padding:9px 12px;
+  border-radius:10px;
+  font:inherit;
+  outline:none;
+}
+.speed-control select:focus{border-color:#9fb2dc;box-shadow:0 0 0 3px #eaf0fd}
+.audio-actions{display:flex;gap:8px;flex-wrap:wrap}
+.control-btn{
+  border:1px solid #dfe6f1;
+  background:#f7f9fd;
+  color:#65738e;
+  padding:9px 13px;
+  border-radius:11px;
+  font-weight:750;
+  font-size:.78rem;
+  cursor:pointer;
+}
+.control-btn:hover{background:#edf2fc;border-color:#cbd7ed}
+.stop-btn{background:#fff4f5;border-color:#f0dce1;color:#b87582}
+.meaning-line,.detail-line{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:7px;
+}
+.meaning-line .bn,.detail-line .df,.detail-line .sy,.detail-line .ex{flex:1;min-width:0;margin:0}
+.meaning-line .bn{padding-top:3px}
+.detail-line .ex{margin:0}
+.listen-tools{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;padding-top:11px;border-top:1px solid #edf0f6}
+.listen-btn,.repeat-btn{
+  border:1px solid #e0e7f2;
+  background:#f7f9fd;
+  color:#697895;
+  padding:7px 10px;
+  border-radius:10px;
+  font-size:.72rem;
+  font-weight:750;
+  cursor:pointer;
+  transition:all .15s;
+}
+.listen-btn:hover{background:#edf2fc;border-color:#bfcee8;color:#5873ac}
+.listen-btn.on{background:#dfe9fb;border-color:#95abd7;color:#526fae}
+.listen-all-btn{background:#edf4ff;color:#5d79b8;border-color:#d7e3f8}
+.repeat-btn{background:#fff0f5;color:#b36f8a;border-color:#f1dce6}
+.repeat-btn:hover,.repeat-btn.active{background:#f8dfe9;border-color:#e8bdcf;color:#a45676}
+.empty{background:#fff;border-radius:16px;border:1px solid var(--border)}
+
+@media(max-width:1250px){
+  .cal-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+}
+@media(max-width:900px){
+  body{padding:14px 12px 28px}
+  .cal-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .list{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  body{padding:9px 8px 24px}
+  .header{padding:16px;gap:10px}
+  .audio-panel{align-items:flex-start;gap:11px;padding:13px}
+  .audio-heading{flex-basis:100%}
+  .speed-control{width:100%;justify-content:space-between}
+  .speed-control select{flex:1;max-width:190px}
+  .audio-actions{width:100%}
+  .control-btn{flex:1}
+  .cal-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .day-card{padding:11px 6px}
+  .card{padding:15px 14px}
+  .meaning-line,.detail-line{align-items:flex-start}
+  .listen-btn{padding:7px 8px;font-size:.69rem}
+}
+@media(max-width:390px){
+  .cal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .meaning-line,.detail-line{flex-direction:column;gap:5px}
+}
+
+
+
+/* Full-width desktop layout and compact theme switch */
+html,body{width:100%;min-height:100%}
+.header-tools{display:flex;align-items:center;gap:10px;margin-left:auto}
+.theme-toggle{
+  width:44px;height:44px;flex:0 0 44px;border-radius:50%;
+  border:1px solid #dfe6f1;background:rgba(255,255,255,.78);
+  color:#617394;font-size:1.15rem;display:inline-flex;align-items:center;
+  justify-content:center;cursor:pointer;box-shadow:0 3px 10px rgba(70,90,130,.08);
+  transition:transform .15s,background .2s,border-color .2s;
+}
+.theme-toggle:hover{transform:translateY(-1px);background:#fff;border-color:#bdcbe3}
+.theme-toggle:focus-visible{outline:3px solid #aebfe4;outline-offset:3px}
+#btnSpeakDay{min-width:190px;white-space:normal}
+@media(min-width:901px){.list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){
+  .header-tools{width:100%;justify-content:space-between;margin-left:0}
+  .clock{width:auto!important;flex:1;text-align:left}
+  .theme-toggle{width:42px;height:42px;flex-basis:42px}
+  #btnSpeakDay{min-width:0;flex:1 1 100%!important}
+}
+
+/* Dark mode — light mode remains the default */
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#171b27;--card:#222838;--text:#e6eaf3;--muted:#a2acc0;
+  --accent:#9db4e8;--accent-l:#303c58;--green:#79b99b;--green-l:#263d35;
+  --amber:#e0b27e;--amber-l:#44372b;--red:#e18d9b;--border:#354056;
+  --sh:0 6px 20px rgba(0,0,0,.18);
+}
+html[data-theme="dark"] body{background:linear-gradient(180deg,#171b27 0%,#1c2130 55%,#171c29 100%);color:var(--text)}
+html[data-theme="dark"] .header{background:linear-gradient(120deg,#293752 0%,#302d49 55%,#3a2c43 100%);border-color:#414a62;color:#edf0f8;box-shadow:0 10px 28px rgba(0,0,0,.2)}
+html[data-theme="dark"] .header h1,html[data-theme="dark"] .header .sub{color:#edf0f8}
+html[data-theme="dark"] .header .sub{opacity:.78}
+html[data-theme="dark"] .clock{background:rgba(18,23,35,.42);color:#d7deee;border-color:#536078}
+html[data-theme="dark"] .clock strong{color:#fff}
+html[data-theme="dark"] .theme-toggle{background:#30394d;border-color:#4b5872;color:#f6d993}
+html[data-theme="dark"] .theme-toggle:hover{background:#3a465e}
+html[data-theme="dark"] .stat,html[data-theme="dark"] .prog,html[data-theme="dark"] .day-progress,
+html[data-theme="dark"] .card,html[data-theme="dark"] .day-card,html[data-theme="dark"] .audio-panel,
+html[data-theme="dark"] .empty{background:#222838;border-color:var(--border);color:var(--text);box-shadow:var(--sh)}
+html[data-theme="dark"] .stat .n{color:#a9bce9}
+html[data-theme="dark"] .stat .l,html[data-theme="dark"] .prog-l,html[data-theme="dark"] .day-progress .row{color:#a2acc0}
+html[data-theme="dark"] .bar,html[data-theme="dark"] .day-progress .bar{background:#394258}
+html[data-theme="dark"] .fill{background:linear-gradient(90deg,#829bd0,#ae91c6)}
+html[data-theme="dark"] .cal-header h2,html[data-theme="dark"] .day-view .day-title{color:#e2e8f5}
+html[data-theme="dark"] .cal-header p,html[data-theme="dark"] .day-sub{color:#a2acc0}
+html[data-theme="dark"] .day-card{background:#222838;border-color:#3a455c}
+html[data-theme="dark"] .day-card .dn{color:#e1e7f2}
+html[data-theme="dark"] .day-card .dd{color:#9faac0}
+html[data-theme="dark"] .day-card .dp{background:#30394d;color:#b1bdd4}
+html[data-theme="dark"] .day-card .mini-bar{background:#3a455b}
+html[data-theme="dark"] .day-card.today{background:linear-gradient(180deg,#2c3a57,#222838);border-color:#829bd0}
+html[data-theme="dark"] .day-card.today .dn{color:#b8c9f3}
+html[data-theme="dark"] .day-card.done{background:#24372f;border-color:#5d9a7e}
+html[data-theme="dark"] .day-card.done .dp{background:#2d4b3e;color:#a5d8be}
+html[data-theme="dark"] .card.mastered{background:#24372f;border-left-color:#79b99b}
+html[data-theme="dark"] .card.learning{background:#352f29;border-left-color:#d6a36f}
+html[data-theme="dark"] .wm .w{color:#f0f3fa}
+html[data-theme="dark"] .wm .p{background:#343d52;color:#bac4d8}
+html[data-theme="dark"] .spk{background:#34415f;color:#c2d2f7}
+html[data-theme="dark"] .spk:hover{background:#415274}
+html[data-theme="dark"] .spk.on{background:#8199cf;color:#172033}
+html[data-theme="dark"] .bn{color:#b9c9ee}
+html[data-theme="dark"] .df,html[data-theme="dark"] .sy{color:#b1bbce}
+html[data-theme="dark"] .sy strong{color:#dce4f4}
+html[data-theme="dark"] .ex{background:#2b3346;border-left-color:#8199cf;color:#d0d8e9}
+html[data-theme="dark"] .acts button,html[data-theme="dark"] .back-btn{background:#2b3346;border-color:#46516a;color:#c0c9da}
+html[data-theme="dark"] .acts button:hover,html[data-theme="dark"] .back-btn:hover{background:#343e54}
+html[data-theme="dark"] .acts .g-on{background:#294538;border-color:#6fa88d;color:#b7e2cb}
+html[data-theme="dark"] .acts .a-on{background:#46382c;border-color:#c79562;color:#f0c89e}
+html[data-theme="dark"] .audio-title{color:#dce5f7}
+html[data-theme="dark"] .audio-hint{color:#a4afc4}
+html[data-theme="dark"] .speed-control{color:#c0c9dc}
+html[data-theme="dark"] .speed-control select,html[data-theme="dark"] .paste-box{background:#2b3346;border-color:#46516a;color:#e4e9f3}
+html[data-theme="dark"] .speed-control select:focus,html[data-theme="dark"] .paste-box:focus{border-color:#8fa7dd;box-shadow:0 0 0 3px rgba(143,167,221,.14)}
+html[data-theme="dark"] .control-btn,html[data-theme="dark"] .listen-btn{background:#2b3346;border-color:#46516a;color:#c3cde0}
+html[data-theme="dark"] .control-btn:hover,html[data-theme="dark"] .listen-btn:hover{background:#36415a;border-color:#66789d;color:#e7ecf7}
+html[data-theme="dark"] .stop-btn{background:#432f38;border-color:#68434d;color:#efb4bf}
+html[data-theme="dark"] .listen-all-btn{background:#303d59;border-color:#4b5f89;color:#c1d2fb}
+html[data-theme="dark"] .listen-btn.on{background:#41547a;border-color:#8199cf;color:#fff}
+html[data-theme="dark"] .repeat-btn{background:#432f3b;border-color:#684353;color:#efb8cf}
+html[data-theme="dark"] .repeat-btn:hover,html[data-theme="dark"] .repeat-btn.active{background:#56384a;border-color:#91617a;color:#ffd7e7}
+html[data-theme="dark"] .upload-screen{background:#171b27}
+html[data-theme="dark"] .upload-box{background:#222838;border-color:#354056;color:#e6eaf3}
+html[data-theme="dark"] .upload-box h2{color:#edf1fa}
+html[data-theme="dark"] .upload-box p{color:#b3bdd0}
+html[data-theme="dark"] .dropzone{background:#2b3346;border-color:#46516a}
+html[data-theme="dark"] .dropzone:hover,html[data-theme="dark"] .dropzone.drag{background:#303d59;border-color:#8199cf}
+html[data-theme="dark"] .dropzone .dz-text{color:#c0cadd}
+html[data-theme="dark"] .paste-box{color:#e5eaf4}
+html[data-theme="dark"] .toast{background:#090d16;color:#f5f6fa}
+
+
+
+/* V3: soft rose / berry / mauve light palette (default theme) */
+:root{
+  --bg:#faf5f8;--card:#fffafd;--text:#433744;--muted:#857786;
+  --accent:#9b416c;--accent-l:#f6e7ef;--green:#5b927b;--green-l:#e8f3ed;
+  --amber:#b7834e;--amber-l:#fbf0e3;--red:#b85c72;--border:#ecdee7;
+  --sh:0 5px 18px rgba(112,65,91,.065);
+}
+html:not([data-theme="dark"]) body{background:linear-gradient(180deg,#fcf8fa 0%,#f8f1f6 58%,#f7f1f5 100%);color:#433744}
+html:not([data-theme="dark"]) .header{background:linear-gradient(120deg,#863958 0%,#a74770 52%,#80627f 100%);box-shadow:0 9px 25px rgba(139,61,96,.18);border:1px solid rgba(255,255,255,.3)}
+html:not([data-theme="dark"]) .stat .n{color:#9b416c}
+html:not([data-theme="dark"]) .fill{background:linear-gradient(90deg,#a74770,#c77b9b,#92759e)}
+html:not([data-theme="dark"]) .cal-header h2,html:not([data-theme="dark"]) .day-view .day-title{color:#594052}
+html:not([data-theme="dark"]) .day-card{background:#fffafd;border-color:#ecdee7}
+html:not([data-theme="dark"]) .day-card .dn{color:#554253}
+html:not([data-theme="dark"]) .day-card .dp{background:#f5eaf0;color:#806477}
+html:not([data-theme="dark"]) .day-card .mini-bar{background:#f0e5ec}
+html:not([data-theme="dark"]) .day-card.today{border-color:#c37b9c;background:linear-gradient(180deg,#f7eaf1,#fffafd)}
+html:not([data-theme="dark"]) .day-card.today .dn{color:#973e68}
+html:not([data-theme="dark"]) .day-card.done{border-color:#a8cdbc;background:#f2f8f4}
+html:not([data-theme="dark"]) .day-card.done .dp{background:#e5f1e9;color:#54866f}
+html:not([data-theme="dark"]) .day-progress .fill{background:linear-gradient(90deg,#6fa88e,#9ac4ad)}
+html:not([data-theme="dark"]) .card{background:#fffafd;border-color:#ecdee7;box-shadow:0 4px 15px rgba(112,65,91,.055)}
+html:not([data-theme="dark"]) .card.mastered{border-left-color:#75a88e;background:#f6faf7}
+html:not([data-theme="dark"]) .card.learning{border-left-color:#c99563;background:#fffaf5}
+html:not([data-theme="dark"]) .wm .w{color:#543b4f}
+html:not([data-theme="dark"]) .wm .p{background:#f4eaf0;color:#806b7a}
+html:not([data-theme="dark"]) .spk{background:#f3e3ec;color:#98456d}
+html:not([data-theme="dark"]) .spk:hover{background:#ecd4e1}
+html:not([data-theme="dark"]) .spk.on{background:#a74770;color:#fff}
+html:not([data-theme="dark"]) .bn{color:#77465f}
+html:not([data-theme="dark"]) .df{color:#756978}
+html:not([data-theme="dark"]) .sy{color:#827383}
+html:not([data-theme="dark"]) .sy strong{color:#674b60}
+html:not([data-theme="dark"]) .ex{background:#f8f1f5;border-left-color:#b46a8d;color:#665466}
+html:not([data-theme="dark"]) .audio-panel{background:#fffafd;border-color:#ecdee7;box-shadow:0 4px 14px rgba(112,65,91,.04)}
+html:not([data-theme="dark"]) .audio-title{color:#68475f}
+html:not([data-theme="dark"]) .audio-hint{color:#917d8d}
+html:not([data-theme="dark"]) .speed-control{color:#795c72}
+html:not([data-theme="dark"]) .speed-control select{background:#fbf5f8;border-color:#eadbe5;color:#674b60}
+html:not([data-theme="dark"]) .speed-control select:focus{border-color:#c17a9a;box-shadow:0 0 0 3px #f6e8ef}
+html:not([data-theme="dark"]) .control-btn,html:not([data-theme="dark"]) .listen-btn{background:#fbf5f8;border-color:#eadde6;color:#795f73}
+html:not([data-theme="dark"]) .control-btn:hover,html:not([data-theme="dark"]) .listen-btn:hover{background:#f5e8ef;border-color:#d9b7c9;color:#8f4166}
+html:not([data-theme="dark"]) .stop-btn{background:#fff0f2;border-color:#f0d5dc;color:#a94e66}
+html:not([data-theme="dark"]) .listen-btn.on{background:#f0dce7;border-color:#c98ca8;color:#84395e}
+html:not([data-theme="dark"]) .listen-all-btn{background:#f0e8f4;color:#755581;border-color:#e2d3e9}
+html:not([data-theme="dark"]) .repeat-btn{background:#f9e8ef;color:#984b70;border-color:#efd2df}
+html:not([data-theme="dark"]) .repeat-btn:hover,html:not([data-theme="dark"]) .repeat-btn.active{background:#f1d7e3;border-color:#d9a6bd;color:#873b60}
+html:not([data-theme="dark"]) .listen-tools{border-top-color:#f0e4eb}
+html:not([data-theme="dark"]) .acts button,html:not([data-theme="dark"]) .back-btn{background:#fffafd;border-color:#eadde6;color:#806e7d}
+html:not([data-theme="dark"]) .acts button:hover,html:not([data-theme="dark"]) .back-btn:hover{background:#f7edf2;border-color:#d9bccb}
+html:not([data-theme="dark"]) .acts .g-on{background:#e8f3ed;border-color:#a9cdb9;color:#4e8168}
+html:not([data-theme="dark"]) .acts .a-on{background:#fbf0e3;border-color:#dfbd99;color:#946c43}
+html:not([data-theme="dark"]) .b1,html:not([data-theme="dark"]) .pick-btn{background:#9b416c;color:#fff;box-shadow:0 4px 12px rgba(155,65,108,.2)}
+html:not([data-theme="dark"]) .b1:hover,html:not([data-theme="dark"]) .pick-btn:hover{background:#87375e}
+html:not([data-theme="dark"]) .b2{background:#fffafd;color:#674b60;border-color:#e7d6e1}
+html:not([data-theme="dark"]) .b3{background:#5b927b;color:#fff;box-shadow:0 4px 12px rgba(91,146,123,.18)}
+html:not([data-theme="dark"]) .b4,html:not([data-theme="dark"]) .paste-btn{background:#80627f;color:#fff;box-shadow:0 4px 12px rgba(128,98,127,.18)}
+html:not([data-theme="dark"]) .dropzone{background:#fbf5f8;border-color:#e7d6e1}
+html:not([data-theme="dark"]) .dropzone:hover,html:not([data-theme="dark"]) .dropzone.drag{background:#f5e8ef;border-color:#bc7898}
+html:not([data-theme="dark"]) .theme-toggle{background:#fffafd;border-color:#eadbe5;color:#99466d}
+html:not([data-theme="dark"]) .theme-toggle:hover{background:#f8edf2;border-color:#d7b5c7}
+html:not([data-theme="dark"]) .upload-box{background:#fffafd;border-color:#ecdee7}
+html:not([data-theme="dark"]) .toast{background:#533d50;color:#fff}
+
 </style>
 </head>
 <body>
@@ -150,10 +514,35 @@ border-radius:12px;font-weight:800;font-size:.85rem;cursor:pointer;width:100%;ma
   <header class="header">
     <div>
       <h1>🎓 IELTS 7.5 · 40-Day Calendar</h1>
-      <div class="sub" id="headerSub">30 words per day · 1200 total · British accent</div>
+      <div class="sub" id="headerSub">30 words per day · 1200 total · British English listening practice</div>
     </div>
-    <div class="clock"><strong id="clk">18:15:22</strong><span id="dt">Wed, 14 Oct 2026</span></div>
+    <div class="header-tools">
+      <div class="clock"><strong id="clk">18:15:22</strong><span id="dt">Wed, 14 Oct 2026</span></div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme" title="Switch to dark theme">🌙</button>
+    </div>
   </header>
+
+  <section class="audio-panel" aria-label="Audio and display settings">
+    <div class="audio-heading">
+      <div class="audio-title">🎧 Listening practice</div>
+      <div class="audio-hint">British English voice · Google Bengali voice online, with browser fallback</div>
+    </div>
+    <label class="speed-control" for="rateSelect">
+      <span>Speaking speed</span>
+      <select id="rateSelect" aria-label="Speaking speed">
+        <option value="0.65">0.65× · Very slow</option>
+        <option value="0.75">0.75× · Slow</option>
+        <option value="0.85">0.85×</option>
+        <option value="0.9" selected>0.9× · Normal slow</option>
+        <option value="1">1.0× · Normal</option>
+        <option value="1.1">1.1×</option>
+        <option value="1.2">1.2× · Fast</option>
+      </select>
+    </label>
+    <div class="audio-actions">
+      <button class="control-btn stop-btn" id="stopAudioBtn" type="button">⏹ Stop audio</button>
+    </div>
+  </section>
 
   <div class="stats">
     <div class="stat"><div class="n" id="sTotal">1200</div><div class="l">Total</div></div>
@@ -186,7 +575,7 @@ border-radius:12px;font-weight:800;font-size:.85rem;cursor:pointer;width:100%;ma
     <div class="back-row">
       <button class="back-btn" id="backBtn">← Calendar</button>
       <div class="day-title" id="dayTitle">Day 1 · Today<span class="day-sub">14 Oct · 30 words</span></div>
-      <button class="btn b2" id="btnSpeakDay" style="flex:0 1 auto">🔊 Speak All</button>
+      <button class="btn b1" id="btnSpeakDay" style="flex:0 1 auto" aria-live="polite">▶ Play all 30 words</button>
     </div>
     <div class="day-progress">
       <div class="row"><span id="dpText">0 / 30 mastered</span><span id="dpPct">0%</span></div>
@@ -262,42 +651,250 @@ function load(){
 }
 
 /* ============================================================
-   SPEAK — British, volume fixed
+   SPEAK — British English + reliable online Bengali audio
+   Bengali first uses Google Translate's hosted speech endpoint.
+   If that request fails, a local Bengali browser voice is tried.
+   A failed Bengali voice stops the queue; it is never silently skipped.
    ============================================================ */
+let speechSessionId=0;
+let repeatTimer=null;
+let activeBengaliAudio=null;
+
 if('speechSynthesis' in window){
   speechSynthesis.getVoices();
   speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices();
 }
-function pickBritishVoice(){
+
+function pickVoice(lang){
+  if(!('speechSynthesis' in window))return null;
   const vs=speechSynthesis.getVoices();
+  if(/^bn/i.test(lang)){
+    return vs.find(v=>/^bn-BD/i.test(v.lang))
+      ||vs.find(v=>/^bn/i.test(v.lang))
+      ||null;
+  }
   const prefer=['Daniel','Serena','Kate','Stephanie','Oliver','Arthur','Sonia','Libby','Ryan','Google UK English Female','Google UK English Male'];
   for(const n of prefer){
     const v=vs.find(x=>x.name&&x.name.indexOf(n)>-1&&/en-GB/i.test(x.lang));
     if(v)return v;
   }
-  return vs.find(v=>v.lang==='en-GB')||vs.find(v=>v.lang&&v.lang.indexOf('en-GB')===0);
+  return vs.find(v=>/^en-GB/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null;
 }
+
+function clearSpeechButtonStates(){
+  document.querySelectorAll('.spk.on,.listen-btn.on,.repeat-btn.on,.control-btn.on,.btn.on').forEach(el=>el.classList.remove('on'));
+  document.querySelectorAll('.repeat-btn').forEach(el=>{
+    if(el.dataset.running==='1'){
+      el.dataset.running='0';
+      el.textContent='🔁 Repeat word 20×';
+      el.classList.remove('active');
+    }
+  });
+}
+
+function disposeActiveBengaliAudio(){
+  const audio=activeBengaliAudio;
+  activeBengaliAudio=null;
+  if(!audio)return;
+  audio.onended=null;
+  audio.onerror=null;
+  try{audio.pause();audio.removeAttribute('src');audio.load();}catch(e){}
+}
+
+function stopSpeech(silent=false){
+  speechSessionId++;
+  if(repeatTimer){clearTimeout(repeatTimer);repeatTimer=null;}
+  disposeActiveBengaliAudio();
+  if('speechSynthesis' in window)speechSynthesis.cancel();
+  clearSpeechButtonStates();
+  const dayPlay=$('btnSpeakDay');
+  if(dayPlay){dayPlay.dataset.running='0';dayPlay.textContent='▶ Play all '+((dayGroups[state.currentDay-1]||[]).length||WORDS_PER_DAY)+' words';}
+  if(!silent && $('stopAudioBtn'))showToast('⏹ Audio stopped');
+}
+
+function getSpeechRate(){
+  const select=$('rateSelect');
+  const value=select?parseFloat(select.value):0.9;
+  return Number.isFinite(value)?value:0.9;
+}
+
+function failBengaliSpeech(btn,sessionId,message){
+  if(sessionId!==speechSessionId)return;
+  if(btn)btn.classList.remove('on');
+  stopSpeech(true);
+  showToast(message||'⚠️ Bengali audio could not load. Check your internet connection and try again.');
+}
+
+function speakBrowserUtterance(text,lang,btn,onEnd,sessionId,providedVoice=null){
+  if(!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance==='undefined'){
+    if(/^bn/i.test(lang))failBengaliSpeech(btn,sessionId,'⚠️ No Bengali voice is available in this browser. Connect to the internet and try again.');
+    else {showToast('Your browser does not support text-to-speech.');if(onEnd)onEnd();}
+    return;
+  }
+  const voice=providedVoice||pickVoice(lang||'en-GB');
+  if(/^bn/i.test(lang) && (!voice || !/^bn/i.test(voice.lang||''))){
+    failBengaliSpeech(btn,sessionId,'⚠️ Bengali audio is unavailable. Please check your internet connection and retry.');
+    return;
+  }
+  const utterance=new SpeechSynthesisUtterance(text);
+  if(voice)utterance.voice=voice;
+  utterance.lang=lang||'en-GB';
+  utterance.volume=1;
+  utterance.rate=getSpeechRate();
+  utterance.pitch=1;
+  if(btn)btn.classList.add('on');
+  let settled=false;
+  const finish=()=>{
+    if(settled||sessionId!==speechSessionId)return;
+    settled=true;
+    if(btn)btn.classList.remove('on');
+    if(onEnd)onEnd();
+  };
+  utterance.onend=finish;
+  utterance.onerror=()=>{
+    if(settled||sessionId!==speechSessionId)return;
+    if(/^bn/i.test(lang)){
+      settled=true;
+      failBengaliSpeech(btn,sessionId,'⚠️ Bengali voice failed. The playlist has paused so the meaning is not skipped.');
+    }else{
+      finish();
+    }
+  };
+  speechSynthesis.speak(utterance);
+}
+
+function speakGoogleBengali(text,btn,onEnd,sessionId){
+  const phrase=String(text||'').trim();
+  if(!phrase){if(onEnd)onEnd();return;}
+  // Google Translate's hosted TTS endpoint accepts Bengali as "bn".
+  // It is a web speech endpoint, not the billable Google Cloud TTS API.
+  const url='https://translate.googleapis.com/translate_tts?client=gtx&ie=UTF-8&tl=bn&q='+encodeURIComponent(phrase);
+  const audio=new Audio();
+  activeBengaliAudio=audio;
+  audio.preload='auto';
+  audio.playbackRate=getSpeechRate();
+  if(btn)btn.classList.add('on');
+  let settled=false;
+  let fallbackStarted=false;
+  let timeoutId=null;
+  const cleanup=()=>{
+    if(timeoutId)clearTimeout(timeoutId);
+    if(activeBengaliAudio===audio)activeBengaliAudio=null;
+    audio.onended=null;
+    audio.onerror=null;
+  };
+  const finish=()=>{
+    if(settled||sessionId!==speechSessionId)return;
+    settled=true;
+    cleanup();
+    if(btn)btn.classList.remove('on');
+    if(onEnd)onEnd();
+  };
+  const fallback=()=>{
+    if(settled||fallbackStarted||sessionId!==speechSessionId)return;
+    fallbackStarted=true;
+    cleanup();
+    try{audio.pause();}catch(e){}
+    const localBengaliVoice=pickVoice('bn-BD');
+    if(localBengaliVoice){
+      speakBrowserUtterance(phrase,'bn-BD',btn,onEnd,sessionId,localBengaliVoice);
+    }else{
+      failBengaliSpeech(btn,sessionId,'⚠️ Google Bengali audio could not load and this device has no Bengali voice. Check internet access and retry.');
+    }
+  };
+  audio.onended=finish;
+  audio.onerror=fallback;
+  audio.src=url;
+  timeoutId=setTimeout(fallback,15000);
+  const playPromise=audio.play();
+  if(playPromise&&typeof playPromise.catch==='function')playPromise.catch(fallback);
+}
+
+function speakUtterance(text,lang,btn,onEnd,sessionId){
+  const phrase=String(text||'').trim();
+  if(!phrase){if(onEnd)onEnd();return;}
+  if(/^bn/i.test(lang||'')){
+    speakGoogleBengali(phrase,btn,onEnd,sessionId);
+    return;
+  }
+  speakBrowserUtterance(phrase,lang||'en-GB',btn,onEnd,sessionId);
+}
+
 function speakBritish(text,btn){
-  const done=()=>{if(btn)btn.classList.remove('on');};
-  if('speechSynthesis' in window){
-    const gb=pickBritishVoice();
-    if(gb){
-      speechSynthesis.cancel();
-      const u=new SpeechSynthesisUtterance(text);
-      u.voice=gb;
-      u.lang='en-GB';
-      u.volume=1.0;
-      u.rate=0.9;
-      u.pitch=1.0;
-      if(btn){btn.classList.add('on');u.onend=done;u.onerror=done;}
-      speechSynthesis.speak(u);
+  stopSpeech(true);
+  const token=speechSessionId;
+  speakUtterance(text,'en-GB',btn,null,token);
+}
+
+function speakSequence(items,btn,onComplete,onItemStart){
+  stopSpeech(true);
+  const token=speechSessionId;
+  let index=0;
+  const next=()=>{
+    if(token!==speechSessionId)return;
+    if(index>=items.length){
+      if(btn)btn.classList.remove('on');
+      if(onComplete)onComplete();
       return;
     }
+    const item=items[index++];
+    if(onItemStart)onItemStart(item,index,items.length);
+    speakUtterance(item.text,item.lang||'en-GB',btn,()=>{
+      if(token!==speechSessionId)return;
+      repeatTimer=setTimeout(()=>{repeatTimer=null;next();},Number.isFinite(item.pauseAfter)?item.pauseAfter:250);
+    },token);
+  };
+  next();
+}
+
+function getWordAudioItems(word){
+  const posNames={adj:'adjective',adv:'adverb',n:'noun',v:'verb',prep:'preposition',pron:'pronoun',conj:'conjunction',interj:'interjection'};
+  const pos=posNames[String(word.pos||'').toLowerCase()]||word.pos||'not specified';
+  return [
+    {text:word.word,lang:'en-GB',section:'word'},
+    {text:'Part of speech: '+pos+'.',lang:'en-GB',section:'info'},
+    {text:'English meaning: '+(word.df||''),lang:'en-GB',section:'definition'},
+    {text:'বাংলা অর্থ। '+(word.bn||''),lang:'bn-BD',section:'bengali',pauseAfter:400},
+    {text:'Synonyms: '+(word.sy||''),lang:'en-GB',section:'synonyms'},
+    {text:'Example sentence: '+(word.ex||''),lang:'en-GB',section:'example',pauseAfter:500}
+  ].filter(item=>item.text&&item.text.trim());
+}
+
+function playWordCard(word,btn){
+  const items=getWordAudioItems(word);
+  speakSequence(items,btn,()=>showToast('✅ Finished listening to '+word.word));
+}
+
+function repeatWordTwentyTimes(word,btn){
+  if(btn.dataset.running==='1'){
+    stopSpeech(true);
+    showToast('Repeat stopped');
+    return;
   }
-  const a=new Audio('https://dict.youdao.com/dictvoice?type=1&audio='+encodeURIComponent(text));
-  a.volume=1.0;
-  if(btn){btn.classList.add('on');a.onended=done;a.onerror=done;}
-  a.play().catch(done);
+  stopSpeech(true);
+  const token=speechSessionId;
+  let count=0;
+  btn.dataset.running='1';
+  btn.classList.add('active');
+  const next=()=>{
+    if(token!==speechSessionId)return;
+    if(count>=20){
+      btn.dataset.running='0';
+      btn.textContent='🔁 Repeat word 20×';
+      btn.classList.remove('active','on');
+      showToast('🎉 '+word+' repeated 20 times!');
+      return;
+    }
+    btn.textContent='⏹ Stop · '+(count+1)+'/20';
+    speakUtterance(word,'en-GB',btn,()=>{
+      if(token!==speechSessionId)return;
+      count++;
+      btn.textContent='⏹ Stop · '+count+'/20';
+      if(count<20)repeatTimer=setTimeout(()=>{repeatTimer=null;next();},450);
+      else next();
+    },token);
+  };
+  next();
 }
 
 /* ============================================================
@@ -340,26 +937,42 @@ function openDay(n){
   const isToday=(n===currentDayNumber());
   $('dayTitle').innerHTML='Day '+n+(isToday?' · Today':'')
     +'<span class="day-sub">'+fmtDate(d)+' · '+g.length+' words</span>';
+  const playAllBtn=$('btnSpeakDay');
+  playAllBtn.dataset.running='0';
+  playAllBtn.textContent='▶ Play all '+g.length+' words';
   renderDayList(g);
 }
 function renderDayList(group){
   const list=$('dayList');
-  if(!group.length){list.innerHTML='<div class="empty"><div class="i">📭</div><p>No words on this day.</p></div>';updateDayProgress(group);return;}
+  if(!group.length){
+    list.innerHTML='<div class="empty"><div class="i">📭</div><p>No words on this day.</p></div>';
+    updateDayProgress(group);
+    return;
+  }
   let html='';
   for(const w of group){
     const st=state.progress[w.word];
     const cls=st==='mastered'?'mastered':(st==='learning'?'learning':'');
-    html+='<div class="card '+cls+'"><div class="top"><div class="wm"><span class="w">'+esc(w.word)+'</span>'
+    html+='<article class="card '+cls+'">'
+      +'<div class="top"><div class="wm"><span class="w">'+esc(w.word)+'</span>'
       +'<span class="p">'+esc(w.pos)+'</span></div>'
-      +'<button class="spk" data-say="'+esc(w.word)+'">🔊</button></div>'
-      +'<div class="bn">'+esc(w.bn)+'</div>'
-      +'<div class="df">'+esc(w.df)+'</div>'
-      +'<div class="sy"><strong>Synonyms:</strong> '+esc(w.sy)+'</div>'
-      +'<div class="ex">'+esc(w.ex)+'</div>'
+      +'<button class="spk" type="button" data-say="'+esc(w.word)+'" aria-label="Listen to '+esc(w.word)+'" title="Listen to main word">🔊</button></div>'
+      +'<div class="meaning-line"><div class="bn">'+esc(w.bn)+'</div>'
+      +'<button class="listen-btn" type="button" data-speech="'+esc(w.bn)+'" data-lang="bn-BD">🔊 বাংলা অর্থ</button></div>'
+      +'<div class="detail-line"><div class="df">'+esc(w.df)+'</div>'
+      +'<button class="listen-btn" type="button" data-speech="'+esc(w.df)+'" data-lang="en-GB">🔊 Definition</button></div>'
+      +'<div class="detail-line"><div class="sy"><strong>Synonyms:</strong> '+esc(w.sy)+'</div>'
+      +'<button class="listen-btn" type="button" data-speech="Synonyms: '+esc(w.sy)+'" data-lang="en-GB">🔊 Synonyms</button></div>'
+      +'<div class="detail-line example-line"><div class="ex">'+esc(w.ex)+'</div>'
+      +'<button class="listen-btn" type="button" data-speech="Example sentence: '+esc(w.ex)+'" data-lang="en-GB">🔊 Example</button></div>'
+      +'<div class="listen-tools">'
+      +'<button class="listen-btn listen-all-btn" type="button" data-playall="'+esc(w.word)+'">▶ Listen to all</button>'
+      +'<button class="repeat-btn" type="button" data-repeat="'+esc(w.word)+'">🔁 Repeat word 20×</button>'
+      +'</div>'
       +'<div class="acts">'
       +'<button class="m1 '+(st==='mastered'?'g-on':'')+'" data-w="'+esc(w.word)+'">✅ Mastered</button>'
       +'<button class="m2 '+(st==='learning'?'a-on':'')+'" data-w="'+esc(w.word)+'">📖 Learning</button>'
-      +'</div></div>';
+      +'</div></article>';
   }
   list.innerHTML=html;
   updateDayProgress(group);
@@ -376,9 +989,37 @@ function updateDayProgress(group){
 }
 function attachWordEvents(group){
   const list=$('dayList');
+  const wordMap=new Map(group.map(w=>[w.word,w]));
+
   list.querySelectorAll('.spk').forEach(btn=>{
-    btn.addEventListener('click',e=>{e.stopPropagation();speakBritish(btn.dataset.say,btn);});
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      speakBritish(btn.dataset.say,btn);
+    });
   });
+
+  list.querySelectorAll('.listen-btn[data-speech]').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      speakSequence([{text:btn.dataset.speech,lang:btn.dataset.lang||'en-GB'}],btn);
+    });
+  });
+
+  list.querySelectorAll('.listen-all-btn').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      const word=wordMap.get(btn.dataset.playall);
+      if(word)playWordCard(word,btn);
+    });
+  });
+
+  list.querySelectorAll('.repeat-btn').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      repeatWordTwentyTimes(btn.dataset.repeat,btn);
+    });
+  });
+
   list.querySelectorAll('button[data-w]').forEach(btn=>{
     btn.addEventListener('click',e=>{
       e.stopPropagation();
@@ -632,6 +1273,42 @@ function startApp(){
 /* ============================================================
    TOOLBAR
    ============================================================ */
+// Audio and display controls
+(function initAudioAndDisplayControls(){
+  const rateSelect=$('rateSelect');
+  try{
+    const savedRate=localStorage.getItem('ieltsVoiceRate');
+    if(savedRate && [...rateSelect.options].some(o=>o.value===savedRate))rateSelect.value=savedRate;
+  }catch(e){}
+  rateSelect.addEventListener('change',()=>{
+    try{localStorage.setItem('ieltsVoiceRate',rateSelect.value);}catch(e){}
+    showToast('🎚 Speaking speed: '+rateSelect.value+'×');
+    if('speechSynthesis' in window && speechSynthesis.speaking){
+      // The new speed applies to the next word/phrase.
+      showToast('🎚 New speed will apply to the next playback');
+    }
+  });
+
+  $('stopAudioBtn').addEventListener('click',()=>stopSpeech());
+
+  const themeToggle=$('themeToggle');
+  const applyTheme=(theme)=>{
+    const selected=theme==='dark'?'dark':'light';
+    document.documentElement.dataset.theme=selected;
+    themeToggle.textContent=selected==='dark'?'☀️':'🌙';
+    themeToggle.setAttribute('aria-label',selected==='dark'?'Switch to light theme':'Switch to dark theme');
+    themeToggle.title=selected==='dark'?'Switch to light theme':'Switch to dark theme';
+    try{localStorage.setItem('ieltsThemePreference',selected);}catch(e){}
+  };
+  let initialTheme='light';
+  try{initialTheme=localStorage.getItem('ieltsThemePreference')||'light';}catch(e){}
+  applyTheme(initialTheme);
+  themeToggle.addEventListener('click',()=>{
+    const nextTheme=document.documentElement.dataset.theme==='dark'?'light':'dark';
+    applyTheme(nextTheme);
+  });
+})();
+
 $('btnToday').addEventListener('click',()=>openDay(currentDayNumber()));
 
 $('btnShuffleAll').addEventListener('click',()=>{
@@ -667,14 +1344,29 @@ $('backBtn').addEventListener('click',()=>{
 
 $('btnSpeakDay').addEventListener('click',()=>{
   const g=dayGroups[state.currentDay-1]||[];
+  const btn=$('btnSpeakDay');
   if(!g.length)return;
-  let i=0;
-  const next=()=>{
-    if(i>=g.length){showToast('✅ Finished speaking');return;}
-    speakBritish(g[i].word);i++;setTimeout(next,1700);
-  };
-  showToast('🔊 Speaking '+g.length+' words...');
-  next();
+  if(btn.dataset.running==='1'){
+    stopSpeech(true);
+    showToast('⏹ Full-day listening stopped');
+    return;
+  }
+  const items=[];
+  g.forEach((word,wordIndex)=>{
+    const wordItems=getWordAudioItems(word);
+    wordItems.forEach(item=>items.push({...item,wordNumber:wordIndex+1,wordTotal:g.length,wordName:word.word}));
+  });
+  showToast('🔊 Playing all details for '+g.length+' words. You can stop anytime.');
+  speakSequence(items,btn,()=>{
+    btn.dataset.running='0';
+    btn.textContent='▶ Play all '+g.length+' words';
+    showToast('✅ Finished all '+g.length+' words and their details');
+  },(item)=>{
+    if(item.section==='word'){
+      btn.textContent='⏸ '+item.wordNumber+'/'+item.wordTotal+' · '+item.wordName;
+    }
+  });
+  btn.dataset.running='1';
 });
 
 /* ============================================================
