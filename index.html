@@ -535,7 +535,7 @@ html:not([data-theme="dark"]) .toast{background:#533d50;color:#fff}
   <section class="audio-panel" aria-label="Audio and display settings">
     <div class="audio-heading">
       <div class="audio-title">🎧 Listening practice</div>
-      <div class="audio-hint">British English voice · Bengali MP3 streamed online (iPhone-compatible range server)</div>
+      <div class="audio-hint">British English voice · Bengali WAV generated online with Gemini TTS</div>
     </div>
     <label class="speed-control" for="rateSelect">
       <span>Speaking speed</span>
@@ -551,12 +551,13 @@ html:not([data-theme="dark"]) .toast{background:#533d50;color:#fff}
     </label>
     <details class="bn-proxy-settings" id="bnProxyDetails" open>
       <summary>📱 iPhone Bengali audio setup</summary>
-      <p>Important: deploy the included Cloudflare Worker first, then paste its HTTPS URL here (include /tts). This fixes iPhone Safari MP3 byte-range playback. Bengali remains online-only.</p>
+      <p>Deploy the updated Cloudflare Worker with the GEMINI_API_KEY secret. Bengali is generated online by Gemini and served as iPhone-compatible WAV audio. No local Bengali voice is used.</p>
       <div class="bn-proxy-row">
-        <input id="bnProxyUrl" type="url" inputmode="url" autocomplete="url" placeholder="https://your-worker.your-subdomain.workers.dev/tts" aria-label="Online Bengali audio worker URL">
+        <input id="bnProxyUrl" type="url" inputmode="url" autocomplete="url" placeholder="https://rabbyv4.rabbygspace.workers.dev/tts" aria-label="Online Bengali audio worker URL">
         <button class="control-btn" id="saveBnProxyBtn" type="button">Save URL</button>
       </div>
-      <div class="bn-proxy-status" id="bnProxyStatus" role="status">Not configured — direct Google audio will be tried.</div>
+      <div class="bn-proxy-status" id="bnProxyStatus" role="status">Default Cloudflare Gemini Bengali audio Worker selected. Add the GEMINI_API_KEY secret in Cloudflare.</div>
+      <p class="audio-hint">Worker status: <a href="https://rabbyv4.rabbygspace.workers.dev/health" target="_blank" rel="noopener">Open /health</a> — it should show <b>"apiKeyConfigured": true</b>.</p>
     </details>
     <div class="audio-actions">
       <button class="control-btn stop-btn" id="stopAudioBtn" type="button">⏹ Stop audio</button>
@@ -671,7 +672,7 @@ function load(){
 }
 
 /* ============================================================
-   SPEAK — British English + ONLINE-ONLY Bengali MP3
+   SPEAK — British English + ONLINE-ONLY Bengali online WAV
    Bengali never uses local speechSynthesis. For iPhone Safari,
    prefer a Cloudflare Worker that returns proper HTTP byte ranges.
    ============================================================ */
@@ -681,8 +682,9 @@ let activeBengaliAudio=null;
 let bengaliAudioPrimed=false;
 let bengaliPrimePromise=null;
 const BENGALI_PROXY_STORAGE_KEY='ieltsBengaliAudioWorkerUrl';
+const DEFAULT_BENGALI_WORKER_URL='https://rabbyv4.rabbygspace.workers.dev/tts';
 
-// Valid 103 ms silent MP3 used only to unlock this persistent media element
+// Silent audio clip used only to unlock this persistent media element; Bengali speech itself always comes from the online Worker.
 // synchronously inside the user's tap before a long mixed-language playlist.
 const BENGALI_SILENT_MP3='data:audio/mpeg;base64,SUQzBAAAAAAAIlRTU0UAAAAOAAADTGF2ZjYxLjcuMTAzAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//NCxKMAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/80LEowAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/80DEpAAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==';
 
@@ -753,7 +755,7 @@ function getSpeechRate(){
 }
 
 // This must be called directly inside the user's tap. It plays the short
-// silent file to unlock the SAME <audio> node used for every Bengali MP3.
+// silent file to unlock the SAME <audio> node used for every Bengali online WAV.
 function primeBengaliAudioForGesture(){
   const audio=getBengaliAudioElement();
   if(!audio)return Promise.resolve(false);
@@ -794,7 +796,7 @@ function failBengaliSpeech(btn,sessionId,message){
   if(sessionId!==speechSessionId)return;
   if(btn)btn.classList.remove('on');
   stopSpeech(true);
-  showToast(message||'⚠️ Online Bengali audio could not be played. Check your connection and Bengali audio server settings.');
+  showToast(message||'⚠️ Online Bengali audio failed. Check the Worker /health page and its GEMINI_API_KEY secret.');
 }
 
 function speakBrowserUtterance(text,lang,btn,onEnd,sessionId,providedVoice=null){
@@ -827,28 +829,18 @@ function speakBrowserUtterance(text,lang,btn,onEnd,sessionId,providedVoice=null)
 }
 
 function getBengaliAudioUrls(phrase){
-  const q=encodeURIComponent(phrase);
-  const urls=[];
   let proxy='';
   try{proxy=(localStorage.getItem(BENGALI_PROXY_STORAGE_KEY)||'').trim();}catch(e){}
   const input=$('bnProxyUrl');
   if(!proxy&&input)proxy=input.value.trim();
-  if(proxy){
-    try{
-      const u=new URL(proxy);
-      if(u.protocol==='https:'){
-        if(!u.pathname.replace(/\/+$/,'').endsWith('/tts'))u.pathname=u.pathname.replace(/\/+$/,'')+'/tts';
-        u.searchParams.set('text',phrase);
-        urls.push(u.toString());
-      }
-    }catch(e){}
-  }
-  // Direct endpoints remain as a fallback for desktop/other browsers.
-  urls.push(
-    'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=bn&q='+q,
-    'https://translate.googleapis.com/translate_tts?client=gtx&ie=UTF-8&tl=bn&q='+q
-  );
-  return [...new Set(urls)];
+  if(!proxy)proxy=DEFAULT_BENGALI_WORKER_URL;
+  try{
+    const u=new URL(proxy);
+    if(u.protocol!=='https:')return [];
+    if(!u.pathname.replace(/\/+$/,'').endsWith('/tts'))u.pathname=u.pathname.replace(/\/+$/,'')+'/tts';
+    u.searchParams.set('text',phrase);
+    return [u.toString()];
+  }catch(e){return [];}
 }
 
 function speakGoogleBengali(text,btn,onEnd,sessionId){
@@ -882,10 +874,9 @@ function speakGoogleBengali(text,btn,onEnd,sessionId){
     if(settled||sessionId!==speechSessionId)return;
     settled=true;
     clearAttempt();
-    const prefix=lastError==='range'?'The audio server did not return iPhone-compatible MP3 byte ranges.':
-      lastError==='blocked'?'Safari blocked this audio play attempt.':
-      'The online Bengali audio server could not return an MP3.';
-    failBengaliSpeech(btn,sessionId,'⚠️ '+prefix+' Configure the Cloudflare Bengali audio worker shown above, then retry.');
+    const prefix=lastError==='blocked'?'Safari blocked the online audio play attempt.':
+      'The online Bengali audio Worker did not return a playable WAV file.';
+    failBengaliSpeech(btn,sessionId,'⚠️ '+prefix+' Open the Worker /health link and confirm GEMINI_API_KEY is configured.');
   };
   const tryNextEndpoint=(reason)=>{
     if(settled||sessionId!==speechSessionId)return;
@@ -896,11 +887,11 @@ function speakGoogleBengali(text,btn,onEnd,sessionId){
     audio.playbackRate=getSpeechRate();
     audio.defaultPlaybackRate=getSpeechRate();
     audio.onended=finish;
-    audio.onerror=()=>tryNextEndpoint('range');
+    audio.onerror=()=>tryNextEndpoint('network');
     audio.onplaying=()=>{bengaliAudioPrimed=true;if(btn)btn.classList.add('on');};
     audio.src=url;
     audio.load();
-    timeoutId=setTimeout(()=>tryNextEndpoint('timeout'),15000);
+    timeoutId=setTimeout(()=>tryNextEndpoint('timeout'),60000);
     let playResult;
     try{playResult=audio.play();}
     catch(e){tryNextEndpoint(e&&e.name==='NotAllowedError'?'blocked':'network');return;}
@@ -964,7 +955,7 @@ function speakSequence(items,btn,onComplete,onItemStart){
 }
 
 function playSingleBengali(text,btn){
-  // Do not await/prime here: start remote MP3 synchronously in this click event.
+  // Start the online Gemini WAV request directly in the user click event.
   stopSpeech(true);
   const token=speechSessionId;
   speakGoogleBengali(text,btn,null,token);
@@ -1417,18 +1408,18 @@ function startApp(){
   const proxyStatus=$('bnProxyStatus');
   try{
     const savedProxy=localStorage.getItem(BENGALI_PROXY_STORAGE_KEY)||'';
-    if(savedProxy)proxyInput.value=savedProxy;
+    proxyInput.value=savedProxy||DEFAULT_BENGALI_WORKER_URL;
   }catch(e){}
   const updateProxyStatus=()=>{
     const hasProxy=!!(proxyInput&&proxyInput.value.trim());
-    if(proxyStatus)proxyStatus.textContent=hasProxy?'✅ Custom online Bengali audio server saved on this device.':'Not configured — direct Google audio will be tried; iPhone may need the Worker URL.';
+    if(proxyStatus)proxyStatus.textContent=hasProxy?'✅ Gemini online Bengali audio Worker selected.':'Default Cloudflare Gemini Bengali audio Worker selected. Add the GEMINI_API_KEY secret in Cloudflare.';
   };
   updateProxyStatus();
   $('saveBnProxyBtn').addEventListener('click',()=>{
     const value=(proxyInput.value||'').trim().replace(/\/+$/,'');
     if(!value){
       try{localStorage.removeItem(BENGALI_PROXY_STORAGE_KEY);}catch(e){}
-      proxyInput.value='';updateProxyStatus();showToast('Direct Google audio mode enabled');return;
+      proxyInput.value=DEFAULT_BENGALI_WORKER_URL;updateProxyStatus();showToast('Default Bengali audio Worker restored');return;
     }
     try{
       const u=new URL(value);
